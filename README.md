@@ -91,9 +91,11 @@ curl -X PATCH http://localhost:3000/tarefas/1/status \
 ```
 
 **Cenário 4: atualizando status de atividades já existentes com um status inválido** Esperado: 400.
+``` bash
 curl -X PATCH http://localhost:3000/tarefas/1/status \
   -H "Content-Type: application/json" \
   -d '{"status": "teste"}'
+```
 
 #### GET /projetos/:id/tarefas
 
