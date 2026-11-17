@@ -31,7 +31,11 @@ docker compose up --build
 #### POST /projetos
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 **Cenário 1: cria um projeto.** Esperado: `201`, e o corpo devolve o projeto com `id: 1`.
+=======
+**Cenário 1: cria um projeto.** Esperado: `201`, e o corpo devolve o projeto com `projetoId: 1`.
+>>>>>>> indev2
 =======
 **Cenário 1: cria um projeto.** Esperado: `201`, e o corpo devolve o projeto com `projetoId: 1`.
 >>>>>>> indev2
