@@ -1,10 +1,13 @@
-import { Injectable } from "@nestjs/common";
+import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 
-@Injectable()
+@Entity('tarefas')
 export class Tarefa {
-  constructor(
-    readonly projetoId: number,
-    titulo: string,
-    status: string,
-  ) { };
+  @PrimaryGeneratedColumn('increment')
+  projetoId: number;
+
+  @Column({ type: 'varchar', length: 50 })
+  titulo: string;
+
+  @Column({ type: 'text', nullable: true })
+  status: string;
 }
