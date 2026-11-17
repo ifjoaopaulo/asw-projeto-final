@@ -19,6 +19,16 @@ export class TarefaService {
       throw new NotFoundException(`Projeto com id ${dados.projetoId} não existe.`);
     }
 
+    const statusValidos = ['pendente', 'em_andamento', 'concluida'];
+
+    if (!statusValidos.includes(dados.status)) {
+      throw new BadRequestException(
+        `Status inválido. Use: pendente, em_andamento, concluida`,
+      );
+    }
+
+
+
     const tarefa: Tarefa = this.tarefaRepositorio.create(dados);
     return await this.tarefaRepositorio.save(tarefa);
   }

@@ -11,6 +11,6 @@ export class Tarefa {
   @Column({ type: 'varchar', length: 50 })
   titulo!: string;
 
-  @Column({ type: 'text' })
+  @Column({ type: 'text', default: 'pendente' })
   status!: string;
 }
