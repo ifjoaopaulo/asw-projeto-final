@@ -2,9 +2,10 @@ import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Projeto } from './projeto.entity';
 import { Repository } from 'typeorm';
+import { ProjetoContract } from './projeto.contract';
 
 @Injectable()
-export class ProjetoService {
+export class ProjetoService implements ProjetoContract{
     constructor(
         @InjectRepository(Projeto)
         private readonly projetoRepository: Repository<Projeto>,
@@ -22,13 +23,14 @@ export class ProjetoService {
     async buscarPorId(id: number): Promise<Projeto> {
         const idx = await this.projetoRepository.findOneBy({ id });
         if(idx === null){
-            throw new NotFoundException(`O projeto com o ID: ${idx}, não existe.`);
+            throw new NotFoundException(`O projeto com o ID: ${id}, não existe.`);
         }
 
         return idx;
     }
 
     async existe(id: number): Promise<boolean> {
-        
+        const projeto = await this.projetoRepository.findOneBy({ id });
+        return projeto !== null;
     }
 }
