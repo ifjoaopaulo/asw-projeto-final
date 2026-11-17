@@ -30,7 +30,7 @@ docker compose up --build
 ### Testes
 #### POST /projetos
 
-**Cenário 1: cria um projeto.** Esperado: `201`, e o corpo devolve o projeto com `projetoId: 1`.
+**Cenário 1: cria um projeto.** Esperado: `201`, e o corpo devolve o projeto com `id: 1`.
 ```
 curl -i -X POST http://localhost:3000/projetos \
   -H "Content-Type: application/json" \
