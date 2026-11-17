@@ -73,7 +73,7 @@ curl -i -X POST http://localhost:3000/tarefas \
 ```
 
 #### PATCH /tarefas/:id/status
-**Cenário 1, 2 e 3: atualizando status de atividades já existentes** Esperado: Nenhum erro, com retorno do objeto com status atualizado.
+**Cenário 1, 2 e 3: atualizando status de atividades já existentes.** Esperado: Nenhum erro, com retorno do objeto com status atualizado.
 ``` bash
 curl -X PATCH http://localhost:3000/tarefas/1/status \
   -H "Content-Type: application/json" \
@@ -90,7 +90,7 @@ curl -X PATCH http://localhost:3000/tarefas/1/status \
   -d '{"status": "pendente"}'
 ```
 
-**Cenário 4: atualizando status de atividades já existentes com um status inválido** Esperado: 400.
+**Cenário 4: atualizando status de atividades já existentes com um status inválido.** Esperado: 400.
 ``` bash
 curl -X PATCH http://localhost:3000/tarefas/1/status \
   -H "Content-Type: application/json" \
