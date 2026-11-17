@@ -3,6 +3,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Tarefa } from './tarefa.entity';
 import { PROJETO_CONTRACT, type ProjetoContract } from 'src/projeto/projeto.contract';
+import { CriarTarefaDto } from './dto/criar-tarefa.dto';
 
 @Injectable()
 export class TarefaService {
@@ -13,7 +14,7 @@ export class TarefaService {
     private readonly projetoContrato: ProjetoContract,
   ) { };
 
-  async criar(dados: { projetoId: number; titulo: string; status: string }): Promise<Tarefa> {
+  async criar(dados: CriarTarefaDto): Promise<Tarefa> {
     if (await this.projetoContrato.existe(dados.projetoId) === false) {
       throw new NotFoundException(`Projeto com id ${dados.projetoId} não existe.`);
     }

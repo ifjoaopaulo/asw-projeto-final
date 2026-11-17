@@ -1,6 +1,7 @@
 import { Body, Controller, Get, Param, ParseIntPipe, Post } from '@nestjs/common';
 import { TarefaService } from './tarefa.service';
 import { Tarefa } from './tarefa.entity';
+import { CriarTarefaDto } from './dto/criar-tarefa.dto';
 
 @Controller()
 export class TarefaController {
@@ -19,7 +20,7 @@ export class TarefaController {
   }
 
   @Post('tarefas')
-  async criar(@Body() body: { projetoId: number, titulo: string, status: string }): Promise<Tarefa> {
+  async criar(@Body() body: CriarTarefaDto): Promise<Tarefa> {
     return await this.tarefaService.criar(body);
   }
 }
