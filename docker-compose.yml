@@ -1,0 +1,39 @@
+# docker-compose.yml = descreve vários containers que rodam juntos.
+# Com um único comando (docker compose up --build) sobem a API e o banco.
+
+services:
+
+  # ---------- Container 1: banco de dados ----------
+  # Requisito do trabalho: PostgreSQL em container próprio, separado da API.
+  db:
+    image: postgres:16-alpine          # imagem pronta do Docker Hub, não precisa de Dockerfile
+    environment:                       # variáveis que o Postgres lê ao iniciar pela 1ª vez
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: tarefas_db          # nome do banco que será criado automaticamente
+    volumes:
+      - db_data:/var/lib/postgresql/data   # guarda os dados fora do container (sobrevivem a um "down")
+    healthcheck:                       # o Docker pergunta ao Postgres "você já está pronto?"
+      test: ["CMD-SHELL", "pg_isready -U postgres -d tarefas_db"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  # ---------- Container 2: API NestJS ----------
+  api:
+    build: .                           # monta a imagem usando o Dockerfile desta pasta
+    ports:
+      - "3000:3000"                    # porta-do-seu-PC : porta-do-container
+    environment:                       # a aplicação lê estas variáveis (process.env)
+      DB_HOST: db                      # IMPORTANTE: dentro do Docker, o host é o NOME do serviço, não "localhost"
+      DB_PORT: 5432
+      DB_USER: postgres
+      DB_PASSWORD: postgres
+      DB_NAME: tarefas_db
+    depends_on:
+      db:
+        condition: service_healthy     # só inicia a API depois que o banco responder
+
+# Declara o volume usado acima.
+volumes:
+  db_data:
