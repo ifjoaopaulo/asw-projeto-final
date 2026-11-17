@@ -36,8 +36,8 @@ export class TarefaService {
   }
 
   async buscarPorId(id: number): Promise<Tarefa> {
-    const tarefa = await this.tarefaRepositorio.findOne({
-      where: { tarefaId: id },
+    const tarefa = await this.tarefaRepositorio.findOneBy({
+      tarefaId: id
     });
 
     if (!tarefa) {
