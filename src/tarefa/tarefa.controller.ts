@@ -24,7 +24,7 @@ export class TarefaController {
     return await this.tarefaService.criar(body);
   }
 
-  @Patch(':id/status')
+  @Patch('tarefas/:id/status')
   atualizarStatus(
     @Param('id', ParseIntPipe) id: number,
     @Body() body: { status: string },
