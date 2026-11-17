@@ -1,4 +1,4 @@
-import { Injectable, Inject, NotFoundException } from '@nestjs/common';
+import { Injectable, Inject, NotFoundException, BadRequestException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Tarefa } from './tarefa.entity';
@@ -33,5 +33,32 @@ export class TarefaService {
     }
 
     return await this.tarefaRepositorio.find({ where: { projetoId } });
+  }
+
+  async buscarPorId(id: number): Promise<Tarefa> {
+    const tarefa = await this.tarefaRepositorio.findOne({
+      where: { tarefaId: id },
+    });
+
+    if (!tarefa) {
+      throw new NotFoundException(`Tarefa com id ${id} não existe.`);
+    }
+
+    return tarefa;
+  }
+
+  async atualizarStatus(id: number, status: string): Promise<Tarefa> {
+    const statusValidos = ['pendente', 'em_andamento', 'concluida'];
+
+    if (!statusValidos.includes(status)) {
+      throw new BadRequestException(
+        `Status inválido. Use: pendente, em_andamento, concluida`,
+      );
+    }
+
+    const tarefa = await this.buscarPorId(id);
+    tarefa.status = status;
+
+    return await this.tarefaRepositorio.save(tarefa);
   }
 }
