@@ -1,4 +1,4 @@
-import { Injectable, Inject } from '@nestjs/common';
+import { Injectable, Inject, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Tarefa } from './tarefa.entity';
@@ -14,6 +14,10 @@ export class TarefaService {
   ) { };
 
   async criar(dados: { projetoId: number; titulo: string; status: string }): Promise<Tarefa> {
+    if (await this.projetoContrato.existe(dados.projetoId) === false) {
+      throw new NotFoundException(`Projeto com id ${dados.projetoId} não existe.`);
+    }
+
     const tarefa: Tarefa = this.tarefaRepositorio.create(dados);
     return await this.tarefaRepositorio.save(tarefa);
   }
@@ -23,6 +27,10 @@ export class TarefaService {
   }
 
   async buscarPorProjeto(projetoId: number): Promise<Tarefa[]> {
+    if (await this.projetoContrato.existe(projetoId) === false) {
+      throw new NotFoundException(`Projeto com id ${projetoId} não existe.`);
+    }
 
+    return await this.tarefaRepositorio.find({ where: { projetoId } });
   }
 }
