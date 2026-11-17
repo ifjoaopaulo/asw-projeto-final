@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Param, Post } from '@nestjs/common';
+import { Body, Controller, Get, Param, ParseIntPipe, Post } from '@nestjs/common';
 import { TarefaService } from './tarefa.service';
 import { Tarefa } from './tarefa.entity';
 
@@ -14,7 +14,7 @@ export class TarefaController {
   }
 
   @Get('projetos/:id/tarefas')
-  async buscarPorProjeto(@Param('id') id: number): Promise<Tarefa[]> {
+  async buscarPorProjeto(@Param('id', ParseIntPipe) id: number): Promise<Tarefa[]> {
     return await this.tarefaService.buscarPorProjeto(id);
   }
 
