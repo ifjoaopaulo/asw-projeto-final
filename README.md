@@ -28,17 +28,7 @@ docker compose up --build
 3. Use o cURL para testar as rotas (ou navegador no caso das rotas Get)
 
 ### Testes
-#### POST /projetos
-
-<<<<<<< HEAD
-<<<<<<< HEAD
-**Cenário 1: cria um projeto.** Esperado: `201`, e o corpo devolve o projeto com `id: 1`.
-=======
 **Cenário 1: cria um projeto.** Esperado: `201`, e o corpo devolve o projeto com `projetoId: 1`.
->>>>>>> indev2
-=======
-**Cenário 1: cria um projeto.** Esperado: `201`, e o corpo devolve o projeto com `projetoId: 1`.
->>>>>>> indev2
 ```
 curl -i -X POST http://localhost:3000/projetos \
   -H "Content-Type: application/json" \
