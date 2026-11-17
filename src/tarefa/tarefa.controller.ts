@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Param, ParseIntPipe, Post } from '@nestjs/common';
+import { Body, Controller, Get, Patch, Param, ParseIntPipe, Post } from '@nestjs/common';
 import { TarefaService } from './tarefa.service';
 import { Tarefa } from './tarefa.entity';
 import { CriarTarefaDto } from './dto/criar-tarefa.dto';
@@ -23,4 +23,13 @@ export class TarefaController {
   async criar(@Body() body: CriarTarefaDto): Promise<Tarefa> {
     return await this.tarefaService.criar(body);
   }
+
+  @Patch(':id/status')
+  atualizarStatus(
+    @Param('id', ParseIntPipe) id: number,
+    @Body() body: { status: string },
+  ) {
+    return this.tarefaService.atualizarStatus(id, body.status);
+  }
+
 }
