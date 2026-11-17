@@ -7,17 +7,17 @@ import { TarefaModule } from './tarefa/tarefa.module';
   imports: [
     TypeOrmModule.forRoot({
       type: 'postgres',
-      host: 'localhost',        // depois muda para o nome do serviço do Docker
-      port: 5432,
-      username: 'postgres',     // ajuste conforme seu docker-compose
-      password: 'postgres',     // ajuste conforme seu docker-compose
-      database: 'taskmanager',  // nome do banco
+      host: process.env.DB_HOST,
+      port: Number(process.env.DB_PORT),
+      username: process.env.DB_USER,
+      password: process.env.DB_PASSWORD,
+      database: process.env.DB_NAME,
       entities: [__dirname + '/**/*.entity{.ts,.js}'],
-      synchronize: true,        // ← isso cria as tabelas automaticamente
+      synchronize: true,
     }),
     ProjetoModule,
     TarefaModule,
   ],
 })
 
-export class AppModule {}
+export class AppModule { }
