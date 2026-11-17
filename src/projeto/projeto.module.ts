@@ -3,10 +3,15 @@ import { ProjetoController } from './projeto.controller';
 import { ProjetoService } from './projeto.service';
 import { PROJETO_CONTRACT } from './projeto.contract';
 <<<<<<< HEAD
+<<<<<<< HEAD
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { Projeto } from './projeto.entity';
 =======
 >>>>>>> daaabf0 (Adicionado contrato público de projeto/)
+=======
+import { TypeOrmModule } from '@nestjs/typeorm';
+import { Projeto } from './projeto.entity';
+>>>>>>> 11de0a2 (Projeto complete)
 
 
 @Module({

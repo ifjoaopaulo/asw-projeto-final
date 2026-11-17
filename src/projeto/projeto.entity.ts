@@ -4,6 +4,7 @@ import { Column, CreateDateColumn, Entity, PrimaryGeneratedColumn } from "typeor
 export class Projeto {
     @PrimaryGeneratedColumn('increment')
 <<<<<<< HEAD
+<<<<<<< HEAD
     id!: number;
 
     @Column({ type: 'varchar', length: 100 })
@@ -16,14 +17,21 @@ export class Projeto {
     criadoEm!: Date;
 =======
     id: number;
+=======
+    id!: number;
+>>>>>>> 11de0a2 (Projeto complete)
 
     @Column({ type: 'varchar', length: 100 })
-    nome: string;
+    nome!: string;
 
     @Column({ type: 'text', nullable: true })
-    descricao: string;
+    descricao!: string;
 
     @CreateDateColumn()
+<<<<<<< HEAD
     criadoEm: Date;
 >>>>>>> 294e876 (Projeto service and entity)
+=======
+    criadoEm!: Date;
+>>>>>>> 11de0a2 (Projeto complete)
 }
