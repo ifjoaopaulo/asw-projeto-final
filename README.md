@@ -72,6 +72,29 @@ curl -i -X POST http://localhost:3000/tarefas \
   -d '{"projetoId":9999,"titulo":"Tarefa órfã","status":"pendente"}'
 ```
 
+#### PATCH /tarefas/:id/status
+**Cenário 1, 2 e 3: atualizando status de atividades já existentes** Esperado: Nenhum erro, com retorno do objeto com status atualizado.
+``` bash
+curl -X PATCH http://localhost:3000/tarefas/1/status \
+  -H "Content-Type: application/json" \
+  -d '{"status": "em_andamento"}'
+``` 
+``` bash
+curl -X PATCH http://localhost:3000/tarefas/1/status \
+  -H "Content-Type: application/json" \
+  -d '{"status": "concluida"}'
+```
+``` bash
+curl -X PATCH http://localhost:3000/tarefas/1/status \
+  -H "Content-Type: application/json" \
+  -d '{"status": "pendente"}'
+```
+
+**Cenário 4: atualizando status de atividades já existentes com um status inválido** Esperado: 400.
+curl -X PATCH http://localhost:3000/tarefas/1/status \
+  -H "Content-Type: application/json" \
+  -d '{"status": "teste"}'
+
 #### GET /projetos/:id/tarefas
 
 **Cenário 1: projeto com tarefas.** Esperado: `200` e uma lista só com as tarefas do projeto 1.
