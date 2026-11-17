@@ -2,17 +2,8 @@ import { Module } from '@nestjs/common';
 import { ProjetoController } from './projeto.controller';
 import { ProjetoService } from './projeto.service';
 import { PROJETO_CONTRACT } from './projeto.contract';
-<<<<<<< HEAD
-<<<<<<< HEAD
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { Projeto } from './projeto.entity';
-=======
->>>>>>> daaabf0 (Adicionado contrato público de projeto/)
-=======
-import { TypeOrmModule } from '@nestjs/typeorm';
-import { Projeto } from './projeto.entity';
->>>>>>> 11de0a2 (Projeto complete)
-
 
 @Module({
   imports: [TypeOrmModule.forFeature([Projeto])],
@@ -20,4 +11,5 @@ import { Projeto } from './projeto.entity';
   providers: [ProjetoService, { provide: PROJETO_CONTRACT, useExisting: ProjetoService }],
   exports: [PROJETO_CONTRACT]
 })
+
 export class ProjetoModule { }
